@@ -9,7 +9,7 @@ const baseUrl =
     : 'https://rosette-links.vercel.app'
 
 const Meta = ({
-  title = 'Rosette',
+  title = 'Profile',
   name = 'A place to add and share your links',
   description = 'A place to add and share your links online. Add links and share your profile on social media.',
   url = baseUrl,

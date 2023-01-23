@@ -136,6 +136,7 @@ const Register = () => {
               ))}
             </ul>
             <Button
+              type={'button'}
               variant={'text'}
               className="my-2 w-full"
               onClick={() => append({ title: '', link: '' })}

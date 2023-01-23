@@ -12,7 +12,7 @@ export default function Index() {
       <Meta />
       <nav className="absolute z-10 flex w-full items-center justify-between p-4">
         <Link className="text-lg" href={'/'}>
-          Rosette links
+          Profile links
         </Link>
         <div className="btn-group">
           <Link href={'/login'}>

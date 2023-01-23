@@ -1,4 +1,4 @@
-# 🏵️ Rosette - Starter
+# 🏵️ Profile Links - Starter
 
 🔦 The starter code for building full-stack serverless application.
 
