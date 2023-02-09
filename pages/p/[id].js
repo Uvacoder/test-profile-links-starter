@@ -1,20 +1,34 @@
 import Image from 'next/image'
+import { useState, useEffect } from 'react'
 
 import { Facebook, Instagram, Twitter } from '../../components/common/icons'
 import Link from '../../components/common/Link'
 import Layout from '../../components/layout'
+import LinkForm from '../../components/LinkForm'
 import ProfileLink from '../../components/ProfileLink'
 import temp from '../../data.json'
+import { useAuth } from '../../utils/useAuth'
 
-const Profile = ({ profile }) => {
-  if (!profile)
+const Profile = ({ profile, message, type }) => {
+  const [links, setLinks] = useState(profile?.links || [])
+  const { user, isAuth } = useAuth()
+  const handleAddLink = async (data) => {
+    console.log(data)
+  }
+
+  useEffect(() => {
+    profile?.links && setLinks(profile.links)
+  }, [profile])
+
+  if (type !== 'success')
     return (
       <Layout>
         <div className={'w-full text-center text-2xl font-bold text-gray-400'}>
-          Loading...
+          {message}
         </div>
       </Layout>
     )
+
   return (
     <Layout meta={{ name: profile?.name }}>
       <div className="mx-auto flex max-w-lg flex-col">
@@ -46,9 +60,26 @@ const Profile = ({ profile }) => {
 
         <div className="flex flex-col">
           <h2 className="mb-2 text-gray-500">Links</h2>
+          {links.length < 10 && user === profile.id ? (
+            <LinkForm
+              className={'mb-2 w-full'}
+              title={'Add Link'}
+              onFormSubmit={handleAddLink}
+            >
+              + Add Link
+            </LinkForm>
+          ) : (
+            ''
+          )}
           <ul>
-            {profile.links.map((i, idx) => (
-              <ProfileLink key={idx} {...i} />
+            {links.map((i, idx) => (
+              <ProfileLink
+                key={idx}
+                setLinks={setLinks}
+                own={user === profile.id}
+                token={isAuth}
+                {...i}
+              />
             ))}
           </ul>
         </div>
@@ -62,7 +93,7 @@ export default Profile
 export async function getStaticProps({ params }) {
   try {
     return {
-      props: { profile: temp },
+      props: { profile: temp, type: 'success' },
     }
   } catch (error) {
     return {

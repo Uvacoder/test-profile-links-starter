@@ -1,4 +1,6 @@
-import React, { useState } from 'react'
+import axios from 'axios'
+import Router from 'next/router'
+import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 
 import Button from '../components/common/Button'
@@ -14,17 +16,24 @@ const Login = () => {
     reset,
   } = useForm()
   const [loading, setLoading] = useState(false)
+  const [status, setStatus] = useState('')
+
   const onFormSubmit = handleSubmit(async (data) => {
     setLoading(true)
     console.log(data)
     setLoading(false)
-    reset()
   })
+
   return (
     <Layout meta={{ name: 'Login' }}>
       <div className="flex h-full w-full flex-col items-center justify-center">
         <form className="w-96 max-w-xl rounded-xl border p-12 text-base">
           <h1 className="mb-6 w-max text-clip text-2xl font-bold">Login</h1>
+          {status ? (
+            <div className="mb-2 rounded-sm bg-red-50 p-2 text-center ring-2 ring-red-200">
+              {status}
+            </div>
+          ) : null}
           <Input
             label={'Email'}
             name={'email'}
@@ -49,7 +58,6 @@ const Login = () => {
             name="password"
             placeholder={`Your Super secret ✨`}
             aria-label="user-password"
-            handleClick={() => setShowPassword((prev) => !prev)}
             register={register('password', {
               required: `Password is required!`,
             })}

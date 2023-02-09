@@ -1,4 +1,6 @@
-import React, { useState } from 'react'
+import axios from 'axios'
+import Router from 'next/router'
+import React, { useEffect, useState } from 'react'
 import { useFieldArray, useForm } from 'react-hook-form'
 
 import Button from '../components/common/Button'
@@ -17,16 +19,24 @@ const Register = () => {
   } = useForm()
   const { fields, append } = useFieldArray({ control, name: 'links' })
   const [loading, setLoading] = useState(false)
+  const [status, setStatus] = useState('')
+
+  // sending user data to register user
   const onFormSubmit = handleSubmit(async (data) => {
     setLoading(true)
     console.log(data)
     setLoading(false)
-    reset()
   })
+
   return (
     <Layout meta={{ name: 'Register' }}>
       <div className="mx-auto max-w-xl">
         <h1 className="mb-6 w-max text-clip text-2xl font-bold">Register</h1>
+        {status ? (
+          <div className="mb-2 rounded-sm bg-red-50 p-2 text-center ring-2 ring-red-200">
+            {status}
+          </div>
+        ) : null}
         <form>
           <FormSection defaultOpen={true} title={'Credentials'}>
             <Input
@@ -69,7 +79,6 @@ const Register = () => {
               name="password"
               placeholder={`Super secret ✨ - minimum 8 characters`}
               aria-label="user-password"
-              handleClick={() => setShowPassword((prev) => !prev)}
               register={register('password', {
                 required: `Password is required!`,
                 pattern: {
@@ -86,6 +95,7 @@ const Register = () => {
               error={errors?.password}
             />
           </FormSection>
+
           {/* Social media links */}
           <FormSection title={'Social media'}>
             <p className="text-xs text-gray-600">
@@ -111,7 +121,7 @@ const Register = () => {
             />
           </FormSection>
 
-          {/* Social media links */}
+          {/* Links media links */}
           <FormSection title={'Profile links'}>
             <ul>
               {fields.map((item, index) => (
@@ -136,9 +146,9 @@ const Register = () => {
               ))}
             </ul>
             <Button
-              type={'button'}
               variant={'text'}
               className="my-2 w-full"
+              type={'button'}
               onClick={() => append({ title: '', link: '' })}
             >
               + Add link
