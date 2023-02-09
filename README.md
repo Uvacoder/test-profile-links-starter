@@ -7,7 +7,7 @@
 
 ## Quick Start⚡
 
-You can simply fork this [sandbox](https://codesandbox.io/p/github/giridhar7632/serverless-starter/main) and start editing in [codesandbox](https://codesandbox.io/).
+You can simply fork this [sandbox](https://codesandbox.io/p/sandbox/profile-links-starter-48oevx) and start editing in [codesandbox](https://codesandbox.io/).
 
 ```bash
 yarn create next-app profile-links-app -e https://github.com/giridhar7632/profile-links-starter
