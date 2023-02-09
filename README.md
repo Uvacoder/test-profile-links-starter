@@ -10,12 +10,12 @@
 You can simply fork this [sandbox](https://codesandbox.io/p/github/giridhar7632/serverless-starter/main) and start editing in [codesandbox](https://codesandbox.io/).
 
 ```bash
-yarn create next-app my-serverless-app -e https://github.com/giridhar7632/serverless-starter
+yarn create next-app profile-links-app -e https://github.com/giridhar7632/profile-links-starter
 # or
-npx create-next-app my-serverless-app -e https://github.com/giridhar7632/serverless-starter
+npx create-next-app profile-links-app -e https://github.com/giridhar7632/profile-links-starter
 
 # then
-cd my-serverless-app && yarn dev
+cd profile-links-app && yarn dev
 ```
 
 ## Manual Setup 🚀
